@@ -51,7 +51,7 @@ minima:
   skin: dark
   social_links:
     github: rojasm22
-    # linkedin: tu-usuario-de-linkedin   # quitá el # para mostrar el ícono
+    linkedin:   rojasmar  # quitá el # para mostrar el ícono
 
 # Set this to true to get LaTeX math equation support
 use_math:  true
