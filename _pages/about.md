@@ -1,18 +1,17 @@
 ---
 layout: page
-title: Sobre mí
+title: About
 permalink: /about/
 ---
 
-<!-- Poné tu foto en images/foto.jpg (o cambiá el nombre aquí) -->
 <img align="right" src="{{site.baseurl}}/images/foto.jpg" width="225" alt="Mariano Rojas">
 
-Soy estudiante de último año de Economía en la [Universidad de Costa Rica](https://www.ucr.ac.cr/). Me interesan la econometría, la ciencia de datos, el periodismo de datos y las finanzas, sobre todo cuando se aplican a problemas concretos de la economía costarricense.
+I'm a final-year Economics student at the [University of Costa Rica](https://www.ucr.ac.cr/). I'm interested in econometrics, data science, data journalism and finance, especially when they're applied to concrete problems in the Costa Rican economy.
 
-Actualmente trabajo como asistente de investigación en Doble Check, el proyecto de verificación de datos de la UCR, donde reviso afirmaciones públicas sobre economía y finanzas públicas con datos oficiales.
+I currently work as a research assistant at Doble Check, the University of Costa Rica's fact-checking project, where I verify public claims about the economy and public finances using official data.
 
-Antes hice una pasantía en [CINDE](https://www.cinde.org/) en el área de Investigación, Monitoreo y Evaluación, y un semestre de intercambio en la [Universidad Carlos III de Madrid](https://www.uc3m.es/), donde obtuve matrícula de honor en Machine Learning.
+Previously, I interned at [CINDE](https://www.cinde.org/) in the Research, Monitoring & Evaluation area, and spent an exchange semester at [Universidad Carlos III de Madrid](https://www.uc3m.es/), where I earned honors in Machine Learning.
 
-Mi tesis de bachillerato estudia la dinámica del tipo de cambio en Costa Rica con modelos de corrección de error no lineales (TVECM) aplicados al mercado MONEX.
+My undergraduate thesis studies exchange rate dynamics in Costa Rica using nonlinear error-correction models (TVECM) applied to the MONEX foreign exchange market.
 
-Acá escribo sobre econometría, datos y economía costarricense.
+Here I write about econometrics, data and the Costa Rican economy.
