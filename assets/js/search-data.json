@@ -1,0 +1,74 @@
+{
+  
+    
+        "post0": {
+            "title": "Bienvenida",
+            "content": "Este es el primer post de la página. Aquí voy a publicar notas sobre econometría, datos y economía costarricense. . Las fórmulas se escriben con LaTeX, por ejemplo $ Delta y_t = alpha beta’ y_{t-1} + varepsilon_t$. . Para escribir un post nuevo: . En Markdown: creá un archivo _posts/AAAA-MM-DD-titulo.md con un encabezado como el de este archivo. | Como notebook: poné un .ipynb en _notebooks/ con el nombre AAAA-MM-DD-titulo.ipynb. Hay una plantilla en _templates/. | .",
+            "url": "https://rojasm22.github.io/general/2026/11/20/bienvenida.html",
+            "relUrl": "/general/2026/11/20/bienvenida.html",
+            "date": " • Nov 20, 2026"
+        }
+        
+    
+  
+
+  
+  
+
+  
+      ,"page1": {
+          "title": "Sobre mí",
+          "content": ". Soy estudiante de último año de Economía en la Universidad de Costa Rica. Me interesan la econometría, la ciencia de datos, el periodismo de datos y las finanzas, sobre todo cuando se aplican a problemas concretos de la economía costarricense. . Actualmente trabajo como asistente de investigación en Doble Check, el proyecto de verificación de datos de la UCR, donde reviso afirmaciones públicas sobre economía y finanzas públicas con datos oficiales. . Antes hice una pasantía en CINDE en el área de Investigación, Monitoreo y Evaluación, y un semestre de intercambio en la Universidad Carlos III de Madrid, donde obtuve matrícula de honor en Machine Learning. . Mi tesis de bachillerato estudia la dinámica del tipo de cambio en Costa Rica con modelos de corrección de error no lineales (TVECM) aplicados al mercado MONEX. . Acá escribo sobre econometría, datos y economía costarricense. .",
+          "url": "https://rojasm22.github.io/about/",
+          "relUrl": "/about/",
+          "date": ""
+      }
+      
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+      ,"page9": {
+          "title": "",
+          "content": "{} .",
+          "url": "https://rojasm22.github.io/redirects.json",
+          "relUrl": "/redirects.json",
+          "date": ""
+      }
+      
+  
+
+  
+  
+
+  
+  
+
+  
+      ,"page12": {
+          "title": "",
+          "content": "Sitemap: {{ “sitemap.xml” | absolute_url }} | .",
+          "url": "https://rojasm22.github.io/robots.txt",
+          "relUrl": "/robots.txt",
+          "date": ""
+      }
+      
+  
+
+}
