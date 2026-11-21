@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-<img align="right" src="{{site.baseurl}}/images/foto.jpg" width="225" alt="Mariano Rojas">
+<img align="right" src="{{site.baseurl}}/images/foto.JPG" width="225" alt="Mariano Rojas">
 
 I'm a final-year Economics student at the [University of Costa Rica](https://www.ucr.ac.cr/). I'm interested in econometrics, data science, data journalism and finance, especially when they're applied to concrete problems in the Costa Rican economy.
 
