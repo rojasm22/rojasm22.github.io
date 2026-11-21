@@ -8,14 +8,14 @@
 
 title: Mariano Rojas
 description: Economía, econometría y ciencia de datos desde Costa Rica
-github_username: TUUSUARIO
+github_username: rojasm22
 # you can comment the below line out if your repo name is not different than your baseurl
-github_repo: "TUUSUARIO.github.io"
+github_repo: "rojasm22.github.io"
 
 # OPTIONAL: override baseurl and url if using a custom domain
 # Note: leave out the trailing / from this value.
 
-url: "https://TUUSUARIO.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://rojasm22.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 
 ###########################################################
@@ -50,7 +50,7 @@ header_pages:
 minima:
   skin: dark
   social_links:
-    github: TUUSUARIO
+    github: rojasm22
     # linkedin: tu-usuario-de-linkedin   # quitá el # para mostrar el ícono
 
 # Set this to true to get LaTeX math equation support

@@ -1,0 +1,101 @@
+---
+layout: default
+---
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    {%- if page.description -%}
+      {%- if site.html_escape.description -%}
+        <p class="page-description">{{ page.description | escape }}</p>
+      {%- else -%}
+        <p class="page-description">{{ page.description }}</p>
+      {%- endif -%}
+    {%- endif -%}
+    <p class="post-meta post-meta-title">
+      {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: date_format }}
+      </time>
+      {%- if page.modified_date -%}
+        ~ 
+        {%- assign mdate = page.modified_date | date_to_xmlschema -%}
+        <time class="dt-modified" datetime="{{ mdate }}" itemprop="dateModified">
+          {{ mdate | date: date_format }}
+        </time>
+      {%- endif -%}
+      {%- if page.author -%}
+        • {% for author in page.author %}
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">{{ author }}</span></span>
+            {%- if forloop.last == false %}, {% endif -%}
+        {% endfor %}
+      {%- endif %}
+       • {% include reading_time.html -%}
+    </p>
+
+    {% if page.categories.size > 0 and site.show_tags %}
+      <p class="category-tags"><svg class="category-tags-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25Z"/></svg> 
+      {% for category in  page.categories  %}
+        <a class="category-tags-link" href="{{site.baseurl}}/categories/#{{category|slugize}}">{{category}}</a>
+        {% unless forloop.last %}&nbsp;{% endunless %}
+      {% endfor %}
+      </p>
+    {% endif %}
+
+    {% if page.layout == 'notebook' %}
+      {% if page.badges or page.badges == nil %}
+        <div class="notebook-badges">
+          {% unless page.hide_github_badge or site.default_badges.github != true %}{% include notebook_github_link.html %}{% endunless %}
+          {% unless page.hide_binder_badge or site.default_badges.binder != true  %}{% include notebook_binder_link.html %}{% endunless %}
+          {% unless page.hide_colab_badge or site.default_badges.colab != true %}{% include notebook_colab_link.html %}{% endunless %}
+        </div>
+      {% endif -%}
+    {% endif -%}
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    {%- capture toc_html -%}{{ content | toc_only }}{%- endcapture -%}
+    {%- if toc_html != blank -%}
+    <details class="toc-details">
+      <summary>Contents</summary>
+      {{ toc_html }}
+    </details>
+    {%- endif -%}
+    {{ content | inject_anchors }}
+  </div>
+
+  {%- comment -%} prev/next post navigation {%- endcomment -%}
+  {%- assign nav_prev = page.previous -%}
+  {%- assign nav_next = page.next -%}
+  {%- if nav_prev and nav_prev.hide == true -%}{%- assign nav_prev = nil -%}{%- endif -%}
+  {%- if nav_next and nav_next.hide == true -%}{%- assign nav_next = nil -%}{%- endif -%}
+  {%- if nav_prev or nav_next -%}
+  <nav class="post-nav" aria-label="Post navigation">
+    {%- if nav_prev -%}
+    <a class="post-nav-link post-nav-prev" href="{{ nav_prev.url | relative_url }}" rel="prev">
+      <span class="post-nav-label">&larr; Older</span>
+      <span class="post-nav-title">{{ nav_prev.title | escape }}</span>
+    </a>
+    {%- else -%}
+    <div class="post-nav-link post-nav-empty" aria-hidden="true"></div>
+    {%- endif -%}
+    {%- if nav_next -%}
+    <a class="post-nav-link post-nav-next" href="{{ nav_next.url | relative_url }}" rel="next">
+      <span class="post-nav-label">Newer &rarr;</span>
+      <span class="post-nav-title">{{ nav_next.title | escape }}</span>
+    </a>
+    {%- else -%}
+    <div class="post-nav-link post-nav-empty" aria-hidden="true"></div>
+    {%- endif -%}
+  </nav>
+  {%- endif -%}
+
+  {%- if page.comments -%}
+    {%- include utterances.html -%}
+  {%- endif -%}
+  {%- if site.disqus.shortname -%}
+    {%- include disqus_comments.html -%}
+  {%- endif -%}
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>

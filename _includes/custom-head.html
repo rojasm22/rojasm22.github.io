@@ -1,0 +1,125 @@
+{% comment %}
+  Placeholder to allow defining custom head, in principle, you can add anything here, e.g. favicons:
+
+  1. Head over to https://realfavicongenerator.net/ to add your own favicons.
+  2. Customize default _includes/custom-head.html in your source directory and insert the given code snippet.
+{% endcomment %}
+
+
+{%- include favicons.html -%}
+<link rel="preload" href="{{ "/assets/fonts/inter-var.woff2" | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ "/assets/fonts/source-serif-4-var.woff2" | relative_url }}" as="font" type="font/woff2" crossorigin>
+
+{%- comment -%}
+  Load KaTeX only on pages that actually contain maths. site.use_math is the
+  master switch; page.use_math forces it on for a page the check below misses.
+  Without this, every page pulls katex's css, js, auto-render and the font files
+  it triggers -- ~195 KB and 10 requests on /about/, which renders no maths at
+  all, and the same on the home page, /cv/, /publications/, /search/ and /404.
+  The delimiters checked here are the ones configured in renderMathInElement
+  below; a false positive (a bare $ in a code block) only costs a load, while a
+  false negative would leave maths unrendered, so this errs towards loading.
+{%- endcomment -%}
+{%- assign has_math = false -%}
+{%- if page.content contains '$' or page.content contains '[%' or page.content contains '\begin{' -%}
+  {%- assign has_math = true -%}
+{%- endif -%}
+{% if site.use_math and (has_math or page.use_math) %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            // LaTeX environments written bare, with no $$ around them. MathJax
+            // picked these up natively; KaTeX's auto-render only looks at the
+            // delimiters it is given, so without these the block is left as raw
+            // source on the page. The environment delimiters are kept in the
+            // string passed to KaTeX, so alignment still works.
+            {left: "\\begin{align}", right: "\\end{align}", display: true},
+            {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+            {left: "\\begin{equation}", right: "\\end{equation}", display: true},
+            {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+            {left: "\\begin{gather}", right: "\\end{gather}", display: true},
+            {left: "\\begin{gather*}", right: "\\end{gather*}", display: true},
+            // $ last: it would otherwise swallow the opening of a $$ block
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+{% endif %}
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags (inline SVG, no icon font needed)
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<svg class="anchor-link-icon" viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M7.775 3.275a.75.75 0 0 1 0 1.06L3.06 9.05a1.5 1.5 0 0 0 2.122 2.122l4.716-4.716a.75.75 0 0 1 1.06 1.06L6.243 12.232a3 3 0 0 1-4.243-4.243l4.715-4.716a.75.75 0 0 1 1.06 0Z"/></svg>'));
+
+    // copy button on code blocks
+    document.querySelectorAll(".highlight").forEach(function(hl){
+        var pre = hl.querySelector("pre");
+        if (!pre || hl.querySelector(".copy-btn")) return;
+        var btn = document.createElement("button");
+        btn.className = "copy-btn";
+        btn.type = "button";
+        btn.textContent = "Copy";
+        btn.setAttribute("aria-label", "Copy code to clipboard");
+        btn.addEventListener("click", function(){
+            var done = function(){
+                btn.textContent = "Copied!";
+                btn.classList.add("copied");
+                setTimeout(function(){ btn.textContent = "Copy"; btn.classList.remove("copied"); }, 1600);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+            } else {
+                var r = document.createRange(); r.selectNodeContents(pre);
+                var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+                try { document.execCommand("copy"); done(); } catch(e) {}
+                s.removeAllRanges();
+            }
+        });
+        hl.appendChild(btn);
+    });
+
+    // wrap tables so wide ones scroll instead of clipping on mobile
+    document.querySelectorAll(".post-content table").forEach(function(t){
+        if (t.parentElement.classList.contains("table-wrap")) return;
+        var w = document.createElement("div");
+        w.className = "table-wrap";
+        t.parentNode.insertBefore(w, t);
+        w.appendChild(t);
+    });
+
+    // lazy-load below-the-fold images in posts
+    document.querySelectorAll(".post-content img").forEach(function(img){
+        img.loading = "lazy";
+    });
+    });
+</script>
