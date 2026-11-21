@@ -455,8 +455,7 @@ a:hover { color: var(--accent-dark); }
  * genuine photographs and must NOT be inverted.
  */
 .output_png img,
-img[src*="net_schematic"],
-.post-card-media img:not([src*="arm_summit"]):not([src*="orb_slam"]) {
+img[src*="net_schematic"] {
   filter: invert(90.6%) hue-rotate(180deg);
 }
 .post-content figure.image img {
