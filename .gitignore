@@ -1,0 +1,19 @@
+*.swp
+~*
+*~
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+_notebooks/.ipynb_checkpoints
+# Local Netlify folder
+.netlify
+.tweet-cache
+__pycache__
+# Written by the notebook converter at build time (_action_files/nb2post.py).
+# Regenerate it, don't commit it. Generated posts are ignored via a _posts/.gitignore
+# the converter writes naming only its own output, so hand-written markdown posts
+# in _posts/ stay tracked normally.
+images/copied_from_nb/*
+!images/copied_from_nb/README.md
